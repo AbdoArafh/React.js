@@ -13,6 +13,16 @@ class Todo extends React.Component {
         })
     }
 
+    componentDidMount () {
+        const tasks = localStorage.getItem("tasks");
+        if (tasks !== null) {
+            this.setState({tasks: tasks.split(",")});
+        }
+        window.addEventListener("beforeunload", () => {
+            localStorage.setItem("tasks", this.state.tasks);
+        })
+    }
+
     render = () => {
         return (
             <div>
