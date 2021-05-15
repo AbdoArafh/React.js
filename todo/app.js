@@ -49,10 +49,12 @@ class Todo extends React.Component {
     }
 
     addTask = () => {
-        this.setState(state => {
-            let tasks = [...state.tasks, state.input];
-            return {tasks, input: ""};
-        });
+        if (this.state.input != "") {
+            this.setState(state => {
+                let tasks = [...state.tasks, state.input];
+                return {tasks, input: ""};
+            });
+        }
     }
 
     deleteTask = (event) => {
