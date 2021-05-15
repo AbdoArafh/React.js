@@ -5,6 +5,12 @@ class Todo extends React.Component {
             tasks: [],
             input: ""
         };
+
+        window.addEventListener("keyup", (event) => {
+            if (event.keyCode == 13) {
+                this.addTask();
+            }
+        })
     }
 
     render = () => {
