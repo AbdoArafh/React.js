@@ -22,9 +22,16 @@ class TicTacToe extends React.Component {
                 O: parseInt(owins)
             });
         }
+
         window.addEventListener("beforeunload", () => {
             localStorage.setItem("X", this.state.X);
             localStorage.setItem("O", this.state.O);
+        });
+
+        window.addEventListener("keyup", (event) => {
+            if (event.key == "r" || event.key == "R") {
+                this.resetScore();
+            }
         });
     }
 
@@ -55,7 +62,8 @@ class TicTacToe extends React.Component {
                                             onClick={this.played}
                                             key={i + j * this.dimention}
                                             data-row={i}
-                                            data-col={j}>
+                                            data-col={j}
+                                            style={{width:3 + "rem", height:3 + "rem"}}>
                                                 {cell}
                                             </button>
                                         </td>
@@ -67,8 +75,17 @@ class TicTacToe extends React.Component {
                     </tbody>
                 </table>
                 <p>{this.state.message}</p>
+                <button onClick={this.resetScore}>Reset Score</button>
             </div>
         )
+    }
+
+    resetScore = () => {
+        this.setState({
+            X: 0,
+            O: 0,
+            message: ""
+        })
     }
 
     played = (event) => {
@@ -99,8 +116,10 @@ class TicTacToe extends React.Component {
             }));
         }
         else if (this.isTie()) {
-            this.setState({message: "It's a tie!"});
-            this.emptyBoard();
+            this.setState({
+                message: "It's a tie!",
+                board: this.array2d(this.dimention)
+            });
         }
     }
 
