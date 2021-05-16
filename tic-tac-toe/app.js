@@ -3,8 +3,8 @@ class TicTacToe extends React.Component {
         super(props);
         this.dimention = 3;
         this.players = ["X", "O"];
+        this.cellSize = 6;
         this.state = {
-            // board: this.array2d(this.dimention),
             board: this.array2d(this.dimention),
             player: this.players[Math.floor(Math.random() * this.players.length)],
             message: "",
@@ -63,7 +63,8 @@ class TicTacToe extends React.Component {
                                             key={i + j * this.dimention}
                                             data-row={i}
                                             data-col={j}
-                                            style={{width:3 + "rem", height:3 + "rem"}}>
+                                            style={{width:this.cellSize + "rem", height:this.cellSize + "rem"}}
+                                            >
                                                 {cell}
                                             </button>
                                         </td>
